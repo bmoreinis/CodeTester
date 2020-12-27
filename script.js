@@ -1,5 +1,6 @@
 var ln = 0;
 var program=[];
+var lnNumbers=false;
 
 class Code {
   constructor(lineNum, command) {
@@ -8,15 +9,21 @@ class Code {
   }
 
   toString() {
-    let tab="";
-    let lineString=this.lineNum.toString();
-    let lineNumLength=lineString.length;
-    let tabLength=8-lineNumLength;
-    for (let i=0;i<tabLength;i++){
-      tab+=" ";
+    if(lnNumbers==true) {
+      let tab="";
+      let lineString=this.lineNum.toString();
+      let lineNumLength=lineString.length;
+      let tabLength=8-lineNumLength;
+      for (let i=0;i<tabLength;i++){
+        tab+=" ";
+      }
+      const ret = this.lineNum + tab + '/* ' + this.command + ' */ \n';
+      return ret;
     }
-    const ret = this.lineNum + tab + '/* ' + this.command + ' */ \n';
-    return ret;
+    else {
+       const ret = '/* ' + this.command + ' */';
+       return ret;
+    }
   }
 }
 
@@ -27,15 +34,21 @@ class CommandLine extends Code {
   }
 
   toString() {
-    let tab="";
-    let lineString=this.lineNum.toString();
-    let lineNumLength=lineString.length;
-    let tabLength=8-lineNumLength;
-    for (let i=0;i<tabLength;i++){
-      tab+=" ";
+    if(lnNumbers==true) {
+      let tab="";
+      let lineString=this.lineNum.toString();
+      let lineNumLength=lineString.length;
+      let tabLength=8-lineNumLength;
+      for (let i=0;i<tabLength;i++){
+        tab+=" ";
+      }
+      const ret = this.lineNum + tab + this.command + '(' + this.argument+ ');\n';
+      return ret;
     }
-    const ret = this.lineNum + tab + this.command + '(' + this.argument+ ');\n';
-    return ret;
+    else {
+      const ret = this.command + '(' + this.argument+ ');\n';
+      return ret;
+    }
   }
 }
 
@@ -162,7 +175,8 @@ function loadCommands(){
   alert(objectList);
 }
 
-function showCode(){
+function showCode(lineNumbers){
+  lnNumbers=lineNumbers;
   programOutput="\n";
   for (let i=0;i<program.length;i++){
     programOutput+=program[i].toString();
