@@ -1,111 +1,11 @@
+/* Globals */
+
 var ln = 0;
 var program=[];
+var locations=[];
+var objects=[];
 var lnNumbers=false;
-
-class Code {
-  constructor(lineNum, command) {
-    this.lineNum = lineNum;
-    this.command = command;
-  }
-
-  toString() {
-    if(lnNumbers==true) {
-      let tab="";
-      let lineString=this.lineNum.toString();
-      let lineNumLength=lineString.length;
-      let tabLength=8-lineNumLength;
-      for (let i=0;i<tabLength;i++){
-        tab+=" ";
-      }
-      const ret = this.lineNum + tab + '/* ' + this.command + ' */ \n';
-      return ret;
-    }
-    else {
-       const ret = '/* ' + this.command + ' */';
-       return ret;
-    }
-  }
-}
-
-class CommandLine extends Code {
-  constructor(lineNum, command, argument) {
-    super(lineNum,command);
-    this.argument = argument;
-  }
-
-  toString() {
-    if(lnNumbers==true) {
-      let tab="";
-      let lineString=this.lineNum.toString();
-      let lineNumLength=lineString.length;
-      let tabLength=8-lineNumLength;
-      for (let i=0;i<tabLength;i++){
-        tab+=" ";
-      }
-      const ret = this.lineNum + tab + this.command + '(' + this.argument+ ');\n';
-      return ret;
-    }
-    else {
-      const ret = this.command + '(' + this.argument+ ');\n';
-      return ret;
-    }
-  }
-}
-
-class Object{
-  constructor(name, where) {
-    this.name = name;
-    this.where = where;
-  }
-}
-
-class Location {
-  constructor(name) {
-    this.name = name;
-  }
-}
-
-class LoContainer extends Location {
-  constructor(name,open) {
-    super(name);
-    this.open = false;
-  }
-
-  get state() {
-    return this.open;
-  }
-
-  open() {
-    this.open = true;
-    console.log("{this.name} is open.");
-  }
-
-  close() {
-    this.open = false;
-    console.log("{this.name} is closed.");
-  }
-}
-
-class obContainer extends Object {
-  constructor(name,open) {
-    super(name);
-    this.open = false;
-  }
-
-  get state() {
-    return this.open;
-  }
-
-  open() {
-    this.open = true;
-    console.log("{this.name} is open.");
-  }
-
-  close() {
-    this.state = false;
-    console.log("{this.name} is closed.");
-  }
-}
+var containers=[];
 
 var commands = [
   {
@@ -169,6 +69,119 @@ var commands = [
     "result": "Coated slice from right hand is aligned face down over coated slice face up on plate. You have a sandwich."
   }
 ]
+
+/* Classes */
+
+class Code {
+  constructor(lineNum, command) {
+    this.lineNum = lineNum;
+    this.command = command;
+  }
+
+  toString() {
+    if(lnNumbers==true) {
+      let tab="";
+      let lineString=this.lineNum.toString();
+      let lineNumLength=lineString.length;
+      let tabLength=8-lineNumLength;
+      for (let i=0;i<tabLength;i++){
+        tab+=" ";
+      }
+      const ret = this.lineNum + tab + '/* ' + this.command + ' */ \n';
+      return ret;
+    }
+    else {
+       const ret = '/* ' + this.command + ' */';
+       return ret;
+    }
+  }
+}
+
+class CommandLine extends Code {
+  constructor(lineNum, command, argument) {
+    super(lineNum,command);
+    this.argument = argument;
+  }
+
+  toString() {
+    if(lnNumbers==true) {
+      let tab="";
+      let lineString=this.lineNum.toString();
+      let lineNumLength=lineString.length;
+      let tabLength=8-lineNumLength;
+      for (let i=0;i<tabLength;i++){
+        tab+=" ";
+      }
+      const ret = this.lineNum + tab + this.command + '(' + this.argument+ ');\n';
+      return ret;
+    }
+    else {
+      const ret = this.command + '(' + this.argument+ ');\n';
+      return ret;
+    }
+  }
+}
+
+class Object{
+  constructor(name, where) {
+    this.name = name;
+    objects.push(name);
+    this.where = where;
+  }
+}
+
+class Location {
+  constructor(name) {
+    this.name = name;
+    locations.push(name);
+  }
+}
+
+class LoContainer extends Location {
+  constructor(name,open) {
+    super(name);
+    containers.push(name);
+    this.open = false;
+  }
+
+  get state() {
+    return this.open;
+  }
+
+  open() {
+    this.open = true;
+    console.log("{this.name} is open.");
+  }
+
+  close() {
+    this.open = false;
+    console.log("{this.name} is closed.");
+  }
+}
+
+class obContainer extends Object {
+  constructor(name,open) {
+    super(name);
+    containers.push(name);
+    this.open = false;
+  }
+
+  get state() {
+    return this.open;
+  }
+
+  open() {
+    this.open = true;
+    console.log("{this.name} is open.");
+  }
+
+  close() {
+    this.state = false;
+    console.log("{this.name} is closed.");
+  }
+}
+
+/* Functions */
 
 function loadCommands(){
   let objectList=JSON.stringify(commands)
@@ -237,4 +250,3 @@ function addLineString(){
   showCode();
 }
 
-program.push(initialize());
