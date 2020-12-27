@@ -1,3 +1,10 @@
+/* Globals */
+var ln = 0;
+var program=[];
+var locations=[];
+var objects=[];
+var lnNumbers=false;
+var containers=["peanutButterJar", "jellyJar","fridge","pantry","cubboard","breadBox","breadBag","drawer"];
 
 /* Command definitions */
 var commands = [
@@ -118,63 +125,85 @@ class CommandLine extends Code {
 }
 
 class Object{
-  constructor(name, where) {
+
+  constructor(name,where,isContainer) {
     this.name = name;
     objects.push(name);
     this.where = where;
+    this.isContainer=isContainer;
+    if(isContainer==true){
+      this.open = false;
+      console.log(this.name+ " is a container.")
+      containers.push(this.name);
+    }
+  }
+
+ get state() {
+    if(this.container){
+      return this.open;
+    }
+    else {
+      console.log(this.name + " is not a container.");
+    }
+  }
+
+  open() {
+    if(this.container){
+      this.open = true;
+      console.log("{this.name} is open.");
+    }
+    else {
+      console.log(this.name + " is not a container.");
+    }
+  }
+
+  close() {
+    if(this.container){
+      this.open = false;
+      console.log("{this.name} is closed.");
+    }
+    else {
+      console.log(this.name + " is not a container.");
+    }
   }
 }
 
 class Location {
-  constructor(name) {
+  constructor(name,isContainer) {
     this.name = name;
     locations.push(name);
-  }
-}
-
-class LoContainer extends Location {
-  constructor(name,open) {
-    super(name);
-    containers.push(name);
-    this.open = false;
+    this.isContainer=isContainer;
+    if(isContainer==true){
+      this.open = false;
+      containers.push(this.name);
+    }
   }
 
+  
   get state() {
-    return this.open;
+    if(this.container){
+      return this.open;
+    }
+    else {
+      console.log(this.name + " is not a container.");
+    }
   }
 
   open() {
-    this.open = true;
-    console.log("{this.name} is open.");
+    if(this.container){
+      this.open = true;
+      console.log("{this.name} is open.");
+    }
   }
 
   close() {
-    this.open = false;
-    console.log("{this.name} is closed.");
+    if(this.container){
+      this.open = false;
+      console.log("{this.name} is closed.");
+    }
   }
 }
 
-class ObContainer extends Object {
-  constructor(name,open) {
-    super(name);
-    containers.push(name);
-    this.open = false;
-  }
-
-  get state() {
-    return this.open;
-  }
-
-  open() {
-    this.open = true;
-    console.log("{this.name} is open.");
-  }
-
-  close() {
-    this.state = false;
-    console.log("{this.name} is closed.");
-  }
-}
 
 /* Functions */
 
