@@ -4,7 +4,7 @@ var program=[];
 class Code {
   constructor(lineNum, command) {
     this.lineNum = lineNum;
-    this.command = "/* "+command+" */";
+    this.command = command;
   }
 }
 
@@ -156,16 +156,17 @@ function addCommand(){
 function initialize(){
   let title=prompt("Name of program?");
   let coder=prompt("Name of coder?");
-  let nC = new Code(1, title+" by "+coder);
+  let nC = new Code(1, "/* "+title+" by "+coder+" */");
   return nC;
 }
 
 function addLineByParts(){
-    let lineNumber = prompt("Line number?");
-    let newCommand = prompt("Command?");
-    let newArgument = prompt("Argument?");
-    let newLine=[lineNumber,newCommand+"("+newArgument+");"];
-    commands.push(newLine);
+    let lineNum = prompt("Line number?");
+    lineNum=parseInt(lineNum);
+    let lineCommand = prompt("Command?");
+    let lineArgument = prompt("Argument?");
+    let nCL = new CommandLine(lineNum,lineCommand,lineArgument);
+    program.push(nCL);
 }
 
 function addLineString(){
