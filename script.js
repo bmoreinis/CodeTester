@@ -6,12 +6,36 @@ class Code {
     this.lineNum = lineNum;
     this.command = command;
   }
+
+  toString() {
+    let tab="";
+    let lineString=this.lineNum.toString();
+    let lineNumLength=lineString.length;
+    let tabLength=8-lineNumLength;
+    for (let i=0;i<tabLength;i++){
+      tab+=" ";
+    }
+    const ret = this.lineNum + tab + '/* ' + this.command + ' */ \n';
+    return ret;
+  }
 }
 
 class CommandLine extends Code {
   constructor(lineNum, command, argument) {
     super(lineNum,command);
-    this.argument = "("+argument+");";
+    this.argument = argument;
+  }
+
+  toString() {
+    let tab="";
+    let lineString=this.lineNum.toString();
+    let lineNumLength=lineString.length;
+    let tabLength=8-lineNumLength;
+    for (let i=0;i<tabLength;i++){
+      tab+=" ";
+    }
+    const ret = this.lineNum + tab + this.command + '(' + this.argument+ ');\n';
+    return ret;
   }
 }
 
@@ -69,7 +93,6 @@ class obContainer extends Object {
     console.log("{this.name} is closed.");
   }
 }
-
 
 var commands = [
   {
@@ -140,8 +163,11 @@ function loadCommands(){
 }
 
 function showCode(){
-  let objectList=JSON.stringify(program)
-  alert(objectList);
+  programOutput="\n";
+  for (let i=0;i<program.length;i++){
+    programOutput+=program[i].toString();
+  }
+  alert(programOutput);
 }
 
 function addCommand(){
@@ -156,7 +182,7 @@ function addCommand(){
 function initialize(){
   let title=prompt("Name of program?");
   let coder=prompt("Name of coder?");
-  let nC = new Code(1, "/* "+title+" by "+coder+" */");
+  let nC = new Code(1, title+" by "+coder);
   return nC;
 }
 
