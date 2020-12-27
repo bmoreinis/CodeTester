@@ -1,12 +1,5 @@
-/* Globals */
 
-var ln = 0;
-var program=[];
-var locations=[];
-var objects=[];
-var lnNumbers=false;
-var containers=[];
-
+/* Command definitions */
 var commands = [
   {
     "command": "goTo",
@@ -101,6 +94,8 @@ class CommandLine extends Code {
   constructor(lineNum, command, argument) {
     super(lineNum,command);
     this.argument = argument;
+    this.rules=[];
+    this.results=[];
   }
 
   toString() {
@@ -159,7 +154,7 @@ class LoContainer extends Location {
   }
 }
 
-class obContainer extends Object {
+class ObContainer extends Object {
   constructor(name,open) {
     super(name);
     containers.push(name);
@@ -182,6 +177,17 @@ class obContainer extends Object {
 }
 
 /* Functions */
+
+function initialize(){
+  let title=prompt("Name of program?");
+  let coder=prompt("Name of coder?");
+  let nC = new Code(1, title+" by "+coder);
+  return nC;
+}
+
+function start() {
+  program.push(initialize());
+}
 
 function loadCommands(){
   let objectList=JSON.stringify(commands)
@@ -206,12 +212,6 @@ function addCommand(){
     commands.push(newCommand);
   }
 
-function initialize(){
-  let title=prompt("Name of program?");
-  let coder=prompt("Name of coder?");
-  let nC = new Code(1, title+" by "+coder);
-  return nC;
-}
 
 function addLineByParts(){
     let lineNum = prompt("Line number?");
