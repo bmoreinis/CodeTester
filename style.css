@@ -13,3 +13,12 @@ input {
   min-height:200px;
   margin-top:5px;
 }
+
+#code p {
+  line-height:.5em;
+}
+
+.tab {
+    display: inline-block;
+    margin-left: 10px;
+}

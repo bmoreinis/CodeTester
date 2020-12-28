@@ -86,18 +86,11 @@ class Code {
 
   toString() {
     if(lnNumbers==true) {
-      let tab="";
-      let lineString=this.lineNum.toString();
-      let lineNumLength=lineString.length;
-      let tabLength=8-lineNumLength;
-      for (let i=0;i<tabLength;i++){
-        tab+=" ";
-      }
-      const ret = this.lineNum + tab + '/* ' + this.command + ' */ \n';
+      const ret = "<p>"+this.lineNum + "<span class=\"tab\"></span> /* " + this.command + ' */</p>\n';
       return ret;
     }
     else {
-       const ret = '/* ' + this.command + ' */';
+       const ret = "<p>"+'/* ' + this.command + ' */</p>\n';
        return ret;
     }
   }
@@ -113,18 +106,11 @@ class CommandLine extends Code {
 
   toString() {
     if(lnNumbers==true) {
-      let tab="";
-      let lineString=this.lineNum.toString();
-      let lineNumLength=lineString.length;
-      let tabLength=8-lineNumLength;
-      for (let i=0;i<tabLength;i++){
-        tab+=" ";
-      }
-      const ret = this.lineNum + tab + this.command + '(' + this.argument+ ');\n';
+      const ret = "<p>"+this.lineNum + "<span class=\"tab\"></span>" + this.command + '(' + this.argument+ ');</p>\n';
       return ret;
     }
     else {
-      const ret = this.command + '(' + this.argument+ ');\n';
+      const ret = "<p>"+this.command + '(' + this.argument+ ');</p>\n';
       return ret;
     }
   }
