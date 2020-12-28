@@ -5,9 +5,21 @@
     <meta name="viewport" content="width=device-width">
     <title>repl.it</title>
     <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="webhelper.js"></script>
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
+    <script>
+      var buttons = document.getElementById("buttons");
+      var code = document.getElementById("code");
+      var instructions = document.getElementById("instructions");
+      var alertArea = document.getElementById("alert-area");
+      var playButton = document.getElementById("play");
+      var alertBox = document.createElement("dialog");
+    </script>
+    <div id="alertArea">
+    </div>
+    <div id="buttons">
     <script type="text/javascript" src="runtime.js"></script> 
     <input type = "button" onclick = "loadCommands()" value = "Show Documentation"> 
     <input type = "button" onclick = "addCommand()" value = "Add Command to Documentation"> 
@@ -15,5 +27,12 @@
     <input type = "button" onclick = "showCode(false)" value = "Show Code, no Lines"> 
     <input type = "button" onclick = "addLineByParts()" value = "Add Line by Parts">
     <input type = "button" onclick = "addLineString()" value = "Add Line Straight"> 
+    <input type = "button" onclick = "clearCode()" value = "Clear Code"> 
+    <input id="play" type = "button" onclick = "play()" value = "Play"> 
+    </div>
+    <div id="instructions">
+    </div>
+    <div id="code">
+    </div>
   </body>
 </html>

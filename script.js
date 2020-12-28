@@ -5,6 +5,12 @@ var locations=[];
 var objects=[];
 var lnNumbers=false;
 var containers=["peanutButterJar", "jellyJar","fridge","pantry","cubboard","breadBox","breadBag","drawer"];
+var buttons = document.getElementById("buttons");
+var code = document.getElementById("code");
+var instructions = document.getElementById("instructions");
+var alertArea = document.getElementById("alert-area");
+var playButton = document.getElementById("play");
+var alertBox = document.createElement("dialog");
 
 /* Command definitions */
 var commands = [
@@ -206,12 +212,13 @@ function loadCommands(){
 }
 
 function showCode(lineNumbers){
+  var code = document.getElementById("code");
   lnNumbers=lineNumbers;
   programOutput="\n";
   for (let i=0;i<program.length;i++){
     programOutput+=program[i].toString();
   }
-  alert(programOutput);
+  code.innerHTML=programOutput;
 }
 
 function addCommand(){

@@ -1,0 +1,15 @@
+#buttons {
+  text-align:center;
+  width:100%;
+}
+input {
+  background-color:antiquewhite;
+  padding:2px;
+  margin:3px;
+}
+#code {
+  width:95%;
+  border:1px solid black;
+  min-height:200px;
+  margin-top:5px;
+}
