@@ -130,76 +130,58 @@ class Object{
     this.name = name;
     objects.push(name);
     this.where = where;
-    this.isContainer=isContainer;
-    if(isContainer==true){
-      this.open = false;
-      console.log(this.name+ " is a container.")
+    this.container=isContainer;
+    if(this.container){
       containers.push(this.name);
+      this._open = false;
+      console.log(containers[containers.length-1]+" is added as a container in the "+this._open+" state.");
     }
   }
 
- get state() {
+  get state() {
     if(this.container){
-      return this.open;
+      console.log(this.name+" open?:"+this._open);
     }
     else {
       console.log(this.name + " is not a container.");
     }
   }
 
-  open() {
-    if(this.container){
-      this.open = true;
-      console.log("{this.name} is open.");
-    }
-    else {
-      console.log(this.name + " is not a container.");
-    }
-  }
-
-  close() {
-    if(this.container){
-      this.open = false;
-      console.log("{this.name} is closed.");
-    }
-    else {
-      console.log(this.name + " is not a container.");
-    }
+  set state(open) {
+    this._open = open;
+    console.log(this.name +" open? "+this._open);
   }
 }
 
+
 class Location {
+
   constructor(name,isContainer) {
     this.name = name;
     locations.push(name);
-    this.isContainer=isContainer;
-    if(isContainer==true){
+    this.container=isContainer;
+    if(this.container){
       this.open = false;
       containers.push(this.name);
     }
   }
 
-  
   get state() {
     if(this.container){
-      return this.open;
+      console.log(this.name+" open?: "+this._open);
     }
     else {
       console.log(this.name + " is not a container.");
     }
   }
 
-  open() {
+  set state(open) {
     if(this.container){
-      this.open = true;
-      console.log("{this.name} is open.");
-    }
-  }
-
-  close() {
-    if(this.container){
-      this.open = false;
-      console.log("{this.name} is closed.");
+      this._open = open;
+      console.log(this.name +" open? "+this._open);
+      }
+    else {
+      console.log(this.name + " is not a container.");
     }
   }
 }

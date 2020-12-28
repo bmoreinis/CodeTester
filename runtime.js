@@ -1,8 +1,23 @@
 /* Runtime Execution */
-start();
 
+function isOpen(myObject){
+  if (myObject.open == true){
+    console.log(myObject.name+" is open.")
+  }
+  else {
+    console.log(myObject.name+" is not open.")
+  }
+}
+
+start();
 var pbj = new Object("peanutButterJar","pantry",true);
-console.log(pbj.isContainer);
+console.log("is it open?");
+isOpen(pbj);
+
+pbj.open = true; //works
+console.log("is it open now?");
+isOpen(pbj);// works
 
 var nCL = new CommandLine(20,"open","peanutButterJar");
+console.log("Is there an argument in the new command?");
 console.log('argument' in nCL);
