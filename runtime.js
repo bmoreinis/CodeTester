@@ -8,6 +8,8 @@ var program=[];
 var locations=[];
 var objects=[];
 var lnNumbers=false;
+var objects=["butterKnife","breadKnife","spoon", "plate","slice","peanutButter","jelly","peanutButterJar", "jellyJar","fridge","pantry","cubboard","breadBox","breadBag","drawer"];
+var spreadables
 var containers=["peanutButterJar", "jellyJar","fridge","pantry","cubboard","breadBox","breadBag","drawer"];
 var locations=["pantry","cupboard","fridge","counter"];
 var buttons = document.getElementById("buttons");
@@ -19,22 +21,30 @@ var alertBox = document.createElement("dialog");
 
 start();
 
+/* tests */
+//status of left hand on creation
+var counter = new Location("counter");
+var pantry = new CLocation("pantry");
+var breadBag = new CObject("breadBag","counter");
+var slice = new Object("slice","breadBag");
 var left = new Hand("left");
-var right = new Hand("right");
-var sister = new Sister(left,right,"kitchen");
-
-left.holding = "slice";
-isEmpty(left);
-isEmpty(sister.left);
-
-var pbj = new Object("peanutButterJar","pantry",true);
-console.log("is it open?");
-isOpen(pbj);
-
-pbj.open = true; //works
-console.log("is it open now?");
-isOpen(pbj);// works
-
+console.log("Is left hand free?");
+console.log(left.handFree);
+// add slice to left Hand
+left.holding = slice;
+// show contents of left hand
+console.log("Is left hand free?");
+console.log(left.handFree);
+// show state of peanutButterJar
+var peanutButterJar = new Object("peanutButterJar","pantry");
+console.log("is peanutButterJar open?");
+console.log(peanutButterJar.open);
+// set open peanutButterJar
+peanutButterJar.open = true; //works
+console.log("is peanutButterJar open now?");
+console.log(peanutButterJar.open);
+// add command and check
 var nCL = new CommandLine(20,"open","peanutButterJar");
-console.log("Is there an argument in the new command?");
-console.log('argument' in nCL);
+checkLastLine();
+
+var sister = new Sister("kitchen");

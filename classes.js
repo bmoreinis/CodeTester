@@ -1,46 +1,73 @@
 /* Classes */
 
+/* Location, which is not a container */
+class Location {
+
+  constructor(name) {
+    this.name = name;
+    this.container = false;
+    this.open = null;
+  }
+
+}
+
+/* Location, which is a container */
+class CLocation extends Location {
+
+  constructor() {
+    super(name);
+    this.container = true;
+    this.open = false;
+    }
+}
+
+/* Object, which must be at a location and is not a container */
+class Object{
+
+  constructor(name,location) {
+    this.name = name;
+    this.location = location;
+    this.container = false;
+    this.open = null;
+  }
+
+}
+
+class CObject extends Object {
+  constructor(name,where) {
+    super(name,location);
+    this.container = true;
+    this.open = false;
+  }
+
+}
+
+/* hand, which may be holding an object */
 class Hand{
+
   constructor(name){
     this.name = name;
+    this.free = true;
     this.holding = null;
   }
 }
 
+/* sister, which must be at a location */
 class Sister{
-  constructor(left,right,location){
-    this.left = left;
-    this.right = right;
-    this.location = location;
+  
+  constructor(){
+    this.location = "kitchen";
     this.hunger = 0;
     this.frustration = 0;
   }
 
-  get sisterLeftFree(){
-    if(this.left.holding = null){
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
-
-  get sisterRightFree(){
-    if(this.right.holding = null){
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
-
   toString() {
-    const ret ="Baby Sister is holding "+this.left.holding+" in her left hand and "+this.right.holding+" in her right hand.  On a scale of 1 to 10, her hunger is "+this.hunger+" and her frustration is "+this.frustration+".";
+    const ret ="Baby Sister is at the "+this.location+".  On a scale of 1 to 10, her hunger is "+this.hunger+" and her frustration is "+this.frustration+".";
   }
 }
 
 
-
+/* Code, which is only a comment */
 class Code {
   constructor(lineNum, command) {
     this.lineNum = lineNum;
@@ -59,6 +86,7 @@ class Code {
   }
 }
 
+/* command, which inherits code but adds argument */
 class CommandLine extends Code {
   constructor(lineNum, command, argument) {
     super(lineNum,command);
@@ -75,68 +103,6 @@ class CommandLine extends Code {
     else {
       const ret = "<p>"+this.command + '(' + this.argument+ ');</p>\n';
       return ret;
-    }
-  }
-}
-
-class Object{
-
-  constructor(name,where,isContainer) {
-    this.name = name;
-    objects.push(name);
-    this.where = where;
-    this.container=isContainer;
-    if(this.container){
-      containers.push(this.name);
-      this._open = false;
-      console.log(containers[containers.length-1]+" is added as a container in the "+this._open+" state.");
-    }
-  }
-
-  get state() {
-    if(this.container){
-      console.log(this.name+" open?:"+this._open);
-    }
-    else {
-      console.log(this.name + " is not a container.");
-    }
-  }
-
-  set state(open) {
-    this._open = open;
-    console.log(this.name +" open? "+this._open);
-  }
-}
-
-
-class Location {
-
-  constructor(name,isContainer) {
-    this.name = name;
-    locations.push(name);
-    this.container=isContainer;
-    if(this.container){
-      this.open = false;
-      containers.push(this.name);
-    }
-  }
-
-  get state() {
-    if(this.container){
-      console.log(this.name+" open?: "+this._open);
-    }
-    else {
-      console.log(this.name + " is not a container.");
-    }
-  }
-
-  set state(open) {
-    if(this.container){
-      this._open = open;
-      console.log(this.name +" open? "+this._open);
-      }
-    else {
-      console.log(this.name + " is not a container.");
     }
   }
 }
