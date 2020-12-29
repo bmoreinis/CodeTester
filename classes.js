@@ -47,8 +47,16 @@ class Hand{
 
   constructor(name){
     this.name = name;
-    this.free = true;
     this.holding = null;
+  }
+
+  get free(){
+    if (this.holding == null){
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 }
 
@@ -72,6 +80,7 @@ class Code {
   constructor(lineNum, command) {
     this.lineNum = lineNum;
     this.command = command;
+    this.argument = null;
   }
 
   toString() {
@@ -87,21 +96,19 @@ class Code {
 }
 
 /* command, which inherits code but adds argument */
-class CommandLine extends Code {
+class Command extends Code {
   constructor(lineNum, command, argument) {
     super(lineNum,command);
     this.argument = argument;
-    this.rules=[];
-    this.results=[];
   }
 
   toString() {
     if(lnNumbers==true) {
-      const ret = "<p>"+this.lineNum + "<span class=\"tab\"></span>" + this.command + '(' + this.argument+ ');</p>\n';
+      const ret = this.lineNum + "<span class=\"tab\"></span>" + this.command + '(' + this.argument+ ');\n';
       return ret;
     }
     else {
-      const ret = "<p>"+this.command + '(' + this.argument+ ');</p>\n';
+      const ret = this.command + '(' + this.argument+ ');\n';
       return ret;
     }
   }

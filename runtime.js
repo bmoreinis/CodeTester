@@ -22,29 +22,39 @@ var alertBox = document.createElement("dialog");
 start();
 
 /* tests */
-//status of left hand on creation
+console.log("Creating test object.....");
 var counter = new Location("counter");
 var pantry = new CLocation("pantry");
 var breadBag = new CObject("breadBag","counter");
 var slice = new Object("slice","breadBag");
 var left = new Hand("left");
-console.log("Is left hand free?");
-console.log(left.handFree);
+var right = new Hand("right");
+var peanutButterJar = new CObject("peanutButterJar","pantry");
+
+// Hand Status //
+//status of left hand on creation
+console.log("Is right hand free?");
+console.log(right.free);
 // add slice to left Hand
-left.holding = slice;
+right.holding = peanutButterJar;
 // show contents of left hand
-console.log("Is left hand free?");
-console.log(left.handFree);
+console.log("Is right hand free now?");
+console.log(right.free);
+
+//Container Status //
 // show state of peanutButterJar
-var peanutButterJar = new Object("peanutButterJar","pantry");
+
 console.log("is peanutButterJar open?");
 console.log(peanutButterJar.open);
 // set open peanutButterJar
 peanutButterJar.open = true; //works
 console.log("is peanutButterJar open now?");
 console.log(peanutButterJar.open);
-// add command and check
-var nCL = new CommandLine(20,"open","peanutButterJar");
-checkLastLine();
 
+// add command and check
+var nCL = new Command("20","hold","peanutButterJar");
+program.push(nCL);
+lnNumbers=true;
+console.log("Loaded: "+program[1]);
+checkLine(program.length-1);
 var sister = new Sister("kitchen");

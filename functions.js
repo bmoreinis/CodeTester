@@ -21,7 +21,7 @@ function showCode(lineNumbers){
   lnNumbers=lineNumbers;
   programOutput="\n";
   for (let i=0;i<program.length;i++){
-    programOutput+=program[i].toString();
+    programOutput+="<p>"+program[i].toString()+"</p>";
   }
   code.innerHTML=programOutput;
 }
@@ -72,22 +72,25 @@ function addLineString(){
   showCode();
 }
 
-function checkLastLine(){
-  let lineToCheck = program[program.length - 1];
-  //if (lineToCheck[lineToCheck.length - 1] ==";"){
-  if (lineToCheck[1]=="hold"){
-    if (right.free()=false){
-      if (left.free()){
-        left.holding=lineToCheck[2];
-        alert("Left is now holding "+lineToCheck[2])
+function checkLine(line){
+  console.log("Checking line "+line+" ...");
+  console.log("Line value is: "+ JSON.stringify(program[line]));
+  let command = program[line].command;
+  let argument = program[line].argument;
+  if (command=="hold"){
+    if (right.free==false){
+      if (left.free){
+        left.holding=argument;
+        console.log("Line parses. Hooray!")
+        console.log("STATUS: left hand is now holding "+argument+ " and right hand is free.");
       }
       else {
-        alert("Left hand is not empty.  Cannot hold new object.  Line was removed.");
+        console.log("Left hand is not empty.  Cannot hold new object.  Line was removed.");
         program.pop();
       }
     }
     else {
-      alert("Right hand is not holding anything, so there is nothing to put in left hand.  Line was removed.");
+      console.log("Right hand is not holding anything, so there is nothing to put in left hand. Line was removed.");
       program.pop();
     }
   }
