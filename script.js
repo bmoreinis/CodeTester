@@ -5,6 +5,7 @@ var locations=[];
 var objects=[];
 var lnNumbers=false;
 var containers=["peanutButterJar", "jellyJar","fridge","pantry","cubboard","breadBox","breadBag","drawer"];
+var locations=["pantry","cupboard","fridge","counter"];
 var buttons = document.getElementById("buttons");
 var code = document.getElementById("code");
 var instructions = document.getElementById("instructions");
@@ -77,6 +78,13 @@ var commands = [
 ]
 
 /* Classes */
+
+class Hand{
+  constructor(name){
+    this.name = name;
+    this.holding = null;
+  }
+}
 
 class Code {
   constructor(lineNum, command) {
@@ -254,3 +262,43 @@ function addLineString(){
   showCode();
 }
 
+function checkLine(){
+  let lineToCheck = program[program.length - 1];
+  if (lineToCheck[lineToCheck.length - 1] ==";"){
+    if (lineToCheck[1]=="hold"){
+      if (isOpen("left")){
+
+      }
+      else {
+        alert("Left hand is not empty.  Cannot hold new object.  Line was removed.");
+        program.pop();
+      }
+    }
+  }
+  else {
+    alert("Line did not end in semicolon and was removed. Re-enter properly.");
+    program.pop();
+  }
+}
+
+function isOpen(myObject){
+  if (myObject.open == true){
+    console.log(myObject.name+" is open.");
+    return true;
+  }
+  else {
+    console.log(myObject.name+" is not open.");
+    return false;
+  }
+}
+
+function isEmpty(myHand){
+  if (myHand.holding == null){
+    console.log(myHand.name+" is empty.");
+    return true;
+  }
+  else {
+    console.log(myHand.name+" is holding a " + myHand.holding);
+    return false;
+  }
+}

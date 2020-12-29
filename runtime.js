@@ -1,15 +1,13 @@
 /* Runtime Execution */
 
-function isOpen(myObject){
-  if (myObject.open == true){
-    console.log(myObject.name+" is open.")
-  }
-  else {
-    console.log(myObject.name+" is not open.")
-  }
-}
 
 start();
+
+var left = new Hand("left");
+var right = new Hand("right");
+left.holding = "slice";
+isEmpty(left);
+
 var pbj = new Object("peanutButterJar","pantry",true);
 console.log("is it open?");
 isOpen(pbj);
