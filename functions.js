@@ -1,17 +1,4 @@
-/* Globals */
-var ln = 0;
-var program=[];
-var locations=[];
-var objects=[];
-var lnNumbers=false;
-var containers=["peanutButterJar", "jellyJar","fridge","pantry","cubboard","breadBox","breadBag","drawer"];
-var locations=["pantry","cupboard","fridge","counter"];
-var buttons = document.getElementById("buttons");
-var code = document.getElementById("code");
-var instructions = document.getElementById("instructions");
-var alertArea = document.getElementById("alert-area");
-var playButton = document.getElementById("play");
-var alertBox = document.createElement("dialog");
+
 
 /* Command definitions */
 var commands = [
@@ -77,114 +64,6 @@ var commands = [
   }
 ]
 
-/* Classes */
-
-class Hand{
-  constructor(name){
-    this.name = name;
-    this.holding = null;
-  }
-}
-
-class Code {
-  constructor(lineNum, command) {
-    this.lineNum = lineNum;
-    this.command = command;
-  }
-
-  toString() {
-    if(lnNumbers==true) {
-      const ret = "<p>"+this.lineNum + "<span class=\"tab\"></span> /* " + this.command + ' */</p>\n';
-      return ret;
-    }
-    else {
-       const ret = "<p>"+'/* ' + this.command + ' */</p>\n';
-       return ret;
-    }
-  }
-}
-
-class CommandLine extends Code {
-  constructor(lineNum, command, argument) {
-    super(lineNum,command);
-    this.argument = argument;
-    this.rules=[];
-    this.results=[];
-  }
-
-  toString() {
-    if(lnNumbers==true) {
-      const ret = "<p>"+this.lineNum + "<span class=\"tab\"></span>" + this.command + '(' + this.argument+ ');</p>\n';
-      return ret;
-    }
-    else {
-      const ret = "<p>"+this.command + '(' + this.argument+ ');</p>\n';
-      return ret;
-    }
-  }
-}
-
-class Object{
-
-  constructor(name,where,isContainer) {
-    this.name = name;
-    objects.push(name);
-    this.where = where;
-    this.container=isContainer;
-    if(this.container){
-      containers.push(this.name);
-      this._open = false;
-      console.log(containers[containers.length-1]+" is added as a container in the "+this._open+" state.");
-    }
-  }
-
-  get state() {
-    if(this.container){
-      console.log(this.name+" open?:"+this._open);
-    }
-    else {
-      console.log(this.name + " is not a container.");
-    }
-  }
-
-  set state(open) {
-    this._open = open;
-    console.log(this.name +" open? "+this._open);
-  }
-}
-
-
-class Location {
-
-  constructor(name,isContainer) {
-    this.name = name;
-    locations.push(name);
-    this.container=isContainer;
-    if(this.container){
-      this.open = false;
-      containers.push(this.name);
-    }
-  }
-
-  get state() {
-    if(this.container){
-      console.log(this.name+" open?: "+this._open);
-    }
-    else {
-      console.log(this.name + " is not a container.");
-    }
-  }
-
-  set state(open) {
-    if(this.container){
-      this._open = open;
-      console.log(this.name +" open? "+this._open);
-      }
-    else {
-      console.log(this.name + " is not a container.");
-    }
-  }
-}
 
 
 /* Functions */
@@ -223,7 +102,6 @@ function addCommand(){
     let newCommand=[cWord,cTakes,cRules,cResult];
     commands.push(newCommand);
   }
-
 
 function addLineByParts(){
     let lineNum = prompt("Line number?");
