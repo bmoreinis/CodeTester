@@ -10,10 +10,23 @@ function initialize(){
 function start() {
   program.push(initialize());
 }
-
 function loadCommands(){
-  let objectList=JSON.stringify(commands)
-  alert(objectList);
+  for(let c=0;c<commandDocValues.length;c++){
+    let newCommand=new CommandDoc(commandDocValues[c][0],commandDocValues[c][1],commandDocValues[c][2]);
+    commandDocs.push(newCommand);
+  }
+  showCommands();
+}
+
+function showCommands(){
+  var code = document.getElementById("code");
+  let newCommand="";
+  let commandString="<dl>";
+  for(let i=0;i<commandDocs.length;i++){
+    commandString+=commandDocs[i].toString();
+  }
+  commandString+="</dl>";
+  code.innerHTML=commandString;
 }
 
 function showCode(lineNumbers){
@@ -71,34 +84,3 @@ function addLineString(){
   program.push(nCL);
   showCode();
 }
-
-function checkLine(line){
-  console.log("Checking line "+line+" ...");
-  console.log("Line value is: "+ JSON.stringify(program[line]));
-  let command = program[line].command;
-  let argument = program[line].argument;
-  if (command=="hold"){
-    if (right.free==false){
-      if (left.free){
-        left.holding=argument;
-        console.log("Line parses. Hooray!")
-        console.log("STATUS: left hand is now holding "+argument+ " and right hand is free.");
-      }
-      else {
-        console.log("Left hand is not empty.  Cannot hold new object.  Line was removed.");
-        program.pop();
-      }
-    }
-    else {
-      console.log("Right hand is not holding anything, so there is nothing to put in left hand. Line was removed.");
-      program.pop();
-    }
-  }
-/*
-  else {
-    alert("Line did not end in semicolon and was removed. Re-enter properly.");
-    program.pop();
-  }
-*/
-}
-

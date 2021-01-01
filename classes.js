@@ -113,3 +113,34 @@ class Command extends Code {
     }
   }
 }
+
+/* CommandDoc, for storing Code Documentation */
+class CommandDoc{
+  
+  constructor(command,rules,result){
+    this.command = command;
+    this.rules = rules;
+    this.result = result;
+  }
+
+  get ruleList(){
+    let arrayString="";
+    for(let j=0;j<this.rules.length;j++){
+      arrayString+=this.rules[j]+"<br>";
+    }
+    return arrayString;
+  }
+
+  get resultList(){
+    let arrayString="";
+    for(let j=0;j<this.result.length;j++){
+      arrayString+=this.result[j]+"<br>";
+    }
+    return arrayString;
+  }
+
+  toString() {
+    const ret ="<dt><strong>"+this.command+"</strong></dt><dd><em>Rules: </em>"+this.ruleList+"</dd><dd><em>Results: </em>"+this.resultList+"</dd>\n";
+    return ret;
+  }
+}
