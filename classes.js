@@ -77,9 +77,9 @@ class Sister{
 
 /* Code, which is only a comment */
 class Code {
-  constructor(lineNum, command) {
+  constructor(lineNum, comment) {
     this.lineNum = lineNum;
-    this.command = command;
+    this.command = comment;
     this.argument = null;
   }
 
@@ -117,8 +117,9 @@ class Command extends Code {
 /* CommandDoc, for storing Code Documentation */
 class CommandDoc{
   
-  constructor(command,rules,result){
+  constructor(command,argument,rules,result){
     this.command = command;
+    this.argument= argument;
     this.rules = rules;
     this.result = result;
   }
@@ -140,7 +141,7 @@ class CommandDoc{
   }
 
   toString() {
-    const ret ="<dt><strong>"+this.command+"</strong></dt><dd><em>Rules: </em>"+this.ruleList+"</dd><dd><em>Results: </em>"+this.resultList+"</dd>\n";
+    const ret ="<dt><strong>"+this.command+"("+this.argument+")"+"</strong></dt><dd><em>Rules: </em>"+this.ruleList+"</dd><dd><em>Results: </em>"+this.resultList+"</dd>\n";
     return ret;
   }
 }

@@ -12,7 +12,7 @@ function start() {
 }
 function loadCommands(){
   for(let c=0;c<commandDocValues.length;c++){
-    let newCommand=new CommandDoc(commandDocValues[c][0],commandDocValues[c][1],commandDocValues[c][2]);
+    let newCommand=new CommandDoc(commandDocValues[c][0],commandDocValues[c][1],commandDocValues[c][2],commandDocValues[c][3]);
     commandDocs.push(newCommand);
   }
   showCommands();
@@ -33,6 +33,7 @@ function showCode(lineNumbers){
   var code = document.getElementById("code");
   lnNumbers=lineNumbers;
   programOutput="\n";
+  program.sort((a, b) => (parseInt(a.lineNum) > parseInt(b.lineNum)) ? 1 : parseInt((a.lineNum) === parseInt(b.lineNum)) ? ((a.command > b.command) ? 1 : -1) : -1 )
   for (let i=0;i<program.length;i++){
     programOutput+="<p>"+program[i].toString()+"</p>";
   }
@@ -40,12 +41,15 @@ function showCode(lineNumbers){
 }
 
 function addCommand(){
-    let cWord = prompt("Command?");
-    let cTakes = prompt("Argument?");
-    let cRules = prompt("Rules?");
-    let cResult = prompt("Result?");
-    let newCommand=[cWord,cTakes,cRules,cResult];
-    commands.push(newCommand);
+  let rules=[], result=[];
+  let cWord = prompt("Command?");
+  let cTakes = prompt("Argument?");
+  let cRules = prompt("Rules?");
+  rules.push(cRules);
+  let cResult = prompt("Result?");
+  result.push(cResult);
+  let newCommand = new CommandDoc(cWord,cTakes,rules,result);
+  commandDocs.push(newCommand);
   }
 
 function addLineByParts(){
@@ -53,7 +57,7 @@ function addLineByParts(){
     lineNum=parseInt(lineNum);
     let lineCommand = prompt("Command?");
     let lineArgument = prompt("Argument?");
-    let nCL = new CommandLine(lineNum,lineCommand,lineArgument);
+    let nCL = new Command(lineNum,lineCommand,lineArgument);
     program.push(nCL);
 }
 
@@ -80,7 +84,7 @@ function addLineString(){
       console.log("Argument: "+lineArgument);
     }
   }
-  let nCL = new CommandLine(lineNum,lineCommand,lineArgument);
+  let nCL = new Command(lineNum,lineCommand,lineArgument);
   program.push(nCL);
   showCode();
 }
