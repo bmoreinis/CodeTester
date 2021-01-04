@@ -35,41 +35,45 @@ var slice = new Object("slice","breadBag");
 var left = new Hand("left");
 var right = new Hand("right");
 var peanutButterJar = new CObject("peanutButterJar","pantry");
+var sister = new Sister("kitchen");
 
 // Hand Status //
 //status of left hand on creation
 console.log("Is right hand free?");
 console.log(right.free);
-// add slice to left Hand
-right.holding = peanutButterJar;
-// show contents of left hand
-console.log("Is right hand free now?");
-console.log(right.free);
 
-//Container Status //
-// show state of peanutButterJar
-
-console.log("is peanutButterJar open?");
-console.log(peanutButterJar.open);
-// set open peanutButterJar
-peanutButterJar.open = true; //works
-console.log("is peanutButterJar open now?");
-console.log(peanutButterJar.open);
-
-// add command and check
+// add commands
 var nCL = new Code("5","Get Spreadables from Pantry");
 program.push(nCL);
 var nCL = new Command("10","goTo","pantry");
 program.push(nCL);
+console.log("adding line: "+JSON.stringify(nCL));
+sister.location=pantry.name;
 nCL = new Command("20","open","pantry");
 program.push(nCL);
+console.log("adding line: "+JSON.stringify(nCL));
+pantry.open=true;
 nCL = new Command("30","get","peanutButterJar");
 program.push(nCL);
+console.log("adding line: "+JSON.stringify(nCL));
+right.holding = peanutButterJar.name;
+console.log("Is right hand free now?");
+console.log(right.free);
+console.log("What is right hand holding?");
+console.log(right.holding);
 nCL = new Command("40","hold","peanutButterJar");
 program.push(nCL);
+console.log("adding line: "+JSON.stringify(nCL));
+left.holding=peanutButterJar.name;
+right.holding=null;
+console.log("is peanutButterJar open?");
+console.log(peanutButterJar.open);
+nCL = new Command("50","open","peanutButterJar");
+program.push(nCL);
+console.log("adding line: "+JSON.stringify(nCL));
+peanutButterJar.open = true; 
+console.log("is peanutButterJar open now?");
+console.log(peanutButterJar.open);
 nCL = new Command("50","get","jellyJar");
 program.push(nCL);
 lnNumbers=true;
-console.log("Loaded: "+program[1]);
-checkLine(program.length-1);
-var sister = new Sister("kitchen");
