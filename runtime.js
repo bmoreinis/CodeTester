@@ -83,7 +83,3 @@ nCL.log();
 peanutButterJar.open = true; 
 console.log("is peanutButterJar open now?");
 console.log(peanutButterJar.open);
-nCL = new Command("50","get","jellyJar");
-program.push(nCL);
-nCL.log();
-lnNumbers=true;
