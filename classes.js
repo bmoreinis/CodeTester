@@ -7,6 +7,9 @@ class Location {
     this.name = name;
     this.container = false;
     this.open = null;
+    this.log = function () {
+    console.log("Created new Location called "+this.name+".");
+    };
   }
 
 }
@@ -14,10 +17,14 @@ class Location {
 /* Location, which is a container */
 class CLocation extends Location {
 
-  constructor() {
-    super(name);
+  constructor(name) {
+    super();
+    this.name=name;
     this.container = true;
     this.open = false;
+    this.log = function () {
+        console.log("Created new Container Location called "+this.name+".");
+    };
     }
 }
 
@@ -29,15 +36,23 @@ class Object{
     this.location = location;
     this.container = false;
     this.open = null;
+    this.log = function () {
+      console.log("Created new Object called "+this.name+".");
+    };
   }
 
 }
 
 class CObject extends Object {
-  constructor(name,where) {
-    super(name,location);
+  constructor(name,location) {
+    super();
+    this.name = name;
+    this.location = location;
     this.container = true;
     this.open = false;
+    this.log = function () {
+      console.log("Created new Container Object called "+this.name+".");
+    };
   }
 
 }
@@ -48,6 +63,9 @@ class Hand{
   constructor(name){
     this.name = name;
     this.holding = null;
+    this.log = function () {
+      console.log("Created new Hand object called "+this.name+".");
+    };
   }
 
   get free(){
@@ -63,10 +81,14 @@ class Hand{
 /* sister, which must be at a location */
 class Sister{
   
-  constructor(){
-    this.location = "kitchen";
+  constructor(name,location){
+    this.name=name;
+    this.location = location;
     this.hunger = 0;
     this.frustration = 0;
+    this.log = function () {
+      console.log("Created new Sister Object called "+this.name+" at the "+this.location+" location.");
+    };
   }
 
   toString() {
@@ -81,6 +103,10 @@ class Code {
     this.lineNum = lineNum;
     this.command = comment;
     this.argument = null;
+    this.log = function () {
+      console.log("Created new Comment at line "+this.lineNum+".");
+      console.log(this.toString);
+    };
   }
 
   toString() {
@@ -98,8 +124,14 @@ class Code {
 /* command, which inherits code but adds argument */
 class Command extends Code {
   constructor(lineNum, command, argument) {
-    super(lineNum,command);
+    super();
+    this.lineNum=lineNum;
+    this.command=command;
     this.argument = argument;
+    this.log = function () {
+      console.log("Created new Command at line "+this.lineNum+":");
+      console.log("   "+this.toString());
+    };
   }
 
   toString() {
