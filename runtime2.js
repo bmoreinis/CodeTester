@@ -1,3 +1,5 @@
+
+
 /* Runtime Execution */
 
 /* Globals */
@@ -49,13 +51,35 @@ sister.log();
 //status of left hand on creation
 
 
-/* Load Sample Program */
-var newCode = [["goTo","cupboard"],["get","plate"],["goTo","counter"],["put","plate"],["open","drawer"],["get","knife"],["open","breadBag"],["get","slice"],["hold","slice"],["get","slice"],["goTo","plate"],["put","slice"],["put","slice"],["goTo","breadBag"],["close","breadBag"],["goTo","pantry"],["open","pantry"],["get","peanutButterJar"],["hold","peanutButterJar"],["get","jellyJar"],["goTo","counter"],["put","jellyJar"],["open","peanutButterJar"],["get","knife"],["scoop","peanutButter"],["put","peanutButterJar"],["spread","slice"],["close","peanutButterJar"],["open","jellyJar"],["get","knife"],["scoop","jelly"],["spread","slice"],["place","slice"],["eat","sandwich"]];
-for (i=0;i<newCode.length;i++){
-  lineNum=((i+2)*10);
-  command=newCode[i][0];
-  argument=newCode[i][1];
-  nCL = new Command(lineNum,command,argument);
-  program.push(nCL);
-  nCL.log();
-}
+// add commands
+var nCL = new Code("5","Get Spreadables from Pantry");
+program.push(nCL);
+var nCL = new Command("10","goTo","pantry");
+program.push(nCL);
+nCL.log();
+sister.location=pantry.name;
+nCL = new Command("20","open","pantry");
+program.push(nCL);
+nCL.log();
+pantry.open=true;
+nCL = new Command("30","get","peanutButterJar");
+program.push(nCL);
+nCL.log();
+right.holding = peanutButterJar.name;
+console.log("Is right hand free now?");
+console.log(right.free);
+console.log("What is right hand holding?");
+console.log(right.holding);
+nCL = new Command("40","hold","peanutButterJar");
+program.push(nCL);
+nCL.log();
+left.holding=peanutButterJar.name;
+right.holding=null;
+console.log("is peanutButterJar open?");
+console.log(peanutButterJar.open);
+nCL = new Command("50","open","peanutButterJar");
+program.push(nCL);
+nCL.log();
+peanutButterJar.open = true; 
+console.log("is peanutButterJar open now?");
+console.log(peanutButterJar.open);
