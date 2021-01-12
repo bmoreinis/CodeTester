@@ -1,7 +1,7 @@
 /* Functions */
 
 function initialize(){
-  let title=prompt("Name of program?");
+  let title=prompt("Title of program?");
   let coder=prompt("Name of coder?");
   let nC = new Code(1, title+" by "+coder);
   return nC;
