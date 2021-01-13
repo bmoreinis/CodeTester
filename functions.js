@@ -13,7 +13,7 @@ function start() {
   code.innerHTML="Welcome to BabySister!  If you don't know what this is and want to, I have a one-hour montage of recordings from various classes.<a href=\"mailto:bmoreinis@slprep.org\">Email me</a> for a link.";
 }
 
-function loadCommands(){
+function loadDocs(){
   for(let c=0;c<commandDocValues.length;c++){
     let newCommand=new CommandDoc(commandDocValues[c][0],commandDocValues[c][1],commandDocValues[c][2],commandDocValues[c][3]);
     commandDocs.push(newCommand);

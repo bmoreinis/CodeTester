@@ -49,13 +49,14 @@ sister.log();
 //status of left hand on creation
 
 
-/* Load Sample Program */
-var newCode = [["goTo","cupBoard"],["get","plate"],["goTo","counter"],["put","plate"],["open","drawer"],["get","knife"],["open","breadBag"],["get","slice"],["hold","slice"],["get","slice"],["goTo","plate"],["put","slice"],["put","slice"],["goTo","breadBag"],["close","breadBag"],["goTo","pantry"],["open","pantry"],["get","peanutButterJar"],["hold","peanutButterJar"],["get","jellyJar"],["goTo","counter"],["put","jellyJar"],["open","peanutButterJar"],["get","knife"],["scoop","peanutButter"],["put","peanutButterJar"],["spread","slice"],["close","peanutButterJar"],["get","jellyJar"],["hold","jellyJar"],["open","jellyJar"],["get","knife"],["scoop","jelly"],["spread","slice"],["placeOver","slice"],["eat","sandwich"]];
-for (i=0;i<newCode.length;i++){
-  lineNum=((i+2)*10);
-  command=newCode[i][0];
-  argument=newCode[i][1];
-  nCL = new Command(lineNum,command,argument);
-  program.push(nCL);
-  nCL.log();
+function loadCommands(){
+  let newCode = [["goTo","cupBoard"],["get","plate"],["goTo","counter"],["put","plate"],["open","drawer"],["get","knife"],["open","breadBag"],["get","slice"],["hold","slice"],["get","slice"],["goTo","plate"],["put","slice"],["put","slice"],["goTo","breadBag"],["close","breadBag"],["goTo","pantry"],["open","pantry"],["get","peanutButterJar"],["hold","peanutButterJar"],["get","jellyJar"],["goTo","counter"],["put","jellyJar"],["open","peanutButterJar"],["get","knife"],["scoop","peanutButter"],["put","peanutButterJar"],["spread","slice"],["close","peanutButterJar"],["get","jellyJar"],["hold","jellyJar"],["open","jellyJar"],["get","knife"],["scoop","jelly"],["spread","slice"],["placeOver","slice"],["eat","sandwich"]];
+  for (i=0;i<newCode.length;i++){
+    lineNum=((i+2)*10);
+    command=newCode[i][0];
+    argument=newCode[i][1];
+    nCL = new Command(lineNum,command,argument);
+    program.push(nCL);
+    nCL.log();
+  }
 }
