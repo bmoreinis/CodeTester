@@ -3,8 +3,9 @@
 function initialize(){
   let title=prompt("Title of program?");
   let coder=prompt("Name of coder?");
-  let nC = new Code(1, title+" by "+coder);
-  return nC;
+  let nC = new Code(10,title+" by "+coder);
+  program.unshift(nC);
+  console.log(JSON.stringify(program[0]));
 }
 
 function start() {

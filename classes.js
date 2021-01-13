@@ -111,11 +111,11 @@ class Code {
 
   toString() {
     if(lnNumbers==true) {
-      const ret = "<p>"+this.lineNum + "<span class=\"tab\"></span> /* " + this.command + ' */</p>\n';
+      const ret = this.lineNum + "<span class=\"tab\"></span> /* " + this.command + ' */\n';
       return ret;
     }
     else {
-       const ret = "<p>"+'/* ' + this.command + ' */</p>\n';
+       const ret = '/* ' + this.command + ' */\n';
        return ret;
     }
   }
