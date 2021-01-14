@@ -21,18 +21,22 @@
     </script>
     <div id="alertArea">
     </div>
-    <div id="buttons">
+    <div id="docbuttons" class="buttons">
+    <h2>Documentation and Sample Code</h2>
+    <input type = "button" value="Kitchen Diagram" onclick="window.open('http://btheb.com/kitchen.png')" />
     <input type = "button" onclick = "loadDocs()" value = "Show Documentation"> 
+    <input type = "button" onclick = "addCommand()" value = "Add Documentation"> 
     <input type = "button" onclick = "loadCommands()" value = "Load Sample Code"> 
-    <input type = "button" onclick = "addCommand()" value = "Add Command to Documentation"> 
+    <input type = "button" onclick = "showCode(true)" value = "Show Code"> 
+    <input type = "button" onclick = "showCode(false)" value = "No Line Numbers"> 
+    </div>
+    <div id="editbuttons" class="buttons">
+    <h2>Edit Code</h2>
+    <input type = "button" onclick = "clearCode()" value = "Clear Code"> 
     <input type = "button" onclick = "initialize()" value = "Start Coding"> 
-    <input type = "button" onclick = "showCode(true)" value = "Show Code with Lines"> 
-    <input type = "button" onclick = "showCode(false)" value = "Show Code, no Lines"> 
     <input type = "button" onclick = "addLineByParts()" value = "Add Line by Parts">
     <input type = "button" onclick = "addLineString()" value = "Add Line Straight"> 
     <input type = "button" onclick = "checkLine(program.length-1)" value = "Check Last Line">
-    <input type = "button" onclick = "clearCode()" value = "Clear Code"> 
-    <input id="play" type = "button" onclick = "play()" value = "Play"> 
     </div>
     <div id="instructions">
     </div>
