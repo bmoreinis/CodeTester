@@ -3,15 +3,18 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>repl.it</title>
+    <title>BabySister Operating System Interface</title>
     <script type="text/javascript" src="classes.js"></script>
+    <script type="text/javascript" src="questions1.js"></script>
     <script type="text/javascript" src="functions.js"></script>
     <script type="text/javascript" src="checkline.js"></script>
     <script type="text/javascript" src="webhelper.js"></script>
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
-  <body>
+  <body style="text-align:center;">
+ 
     <script>
+      /* document.body.style.overflow = 'hidden';*/
       var buttons = document.getElementById("buttons");
       var code = document.getElementById("code");
       var instructions = document.getElementById("instructions");
@@ -19,28 +22,26 @@
       var playButton = document.getElementById("play");
       var alertBox = document.createElement("dialog");
     </script>
+    <div id="docbuttons" class="buttons">
+    <input type = "button" value="Show Kitchen" onclick="window.open('https://lucid.app/lucidchart/0974c802-89ec-431d-82c8-bc52d80cfbb2/view?page=Lva4dpT0COa7#')" />
+    <input type = "button" onclick = "loadDocs()" value = "Command Documentation">  
+    <input type = "button" onclick = "showClasses()" value = "Object Classes">  
+    <input type = "button" onclick = "addCommand()" value = "Add Documentation"> 
+    </div>
     <div id="alertArea">
     </div>
-    <div id="docbuttons" class="buttons">
-    <h2>Documentation and Sample Code</h2>
-    <input type = "button" value="Kitchen Diagram" onclick="window.open('http://btheb.com/kitchen.png')" />
-    <input type = "button" onclick = "loadDocs()" value = "Show Documentation"> 
-    <input type = "button" onclick = "addCommand()" value = "Add Documentation"> 
-    <input type = "button" onclick = "loadCommands()" value = "Load Sample Code"> 
-    <input type = "button" onclick = "showCode(true)" value = "Show Code"> 
-    <input type = "button" onclick = "showCode(false)" value = "No Line Numbers"> 
+    <div id="code">
+    </div>
+     <div id="instructions">
     </div>
     <div id="editbuttons" class="buttons">
-    <h2>Edit Code</h2>
-    <input type = "button" onclick = "clearCode()" value = "Clear Code"> 
-    <input type = "button" onclick = "initialize()" value = "Start Coding"> 
-    <input type = "button" onclick = "addLineByParts()" value = "Add Line by Parts">
-    <input type = "button" onclick = "addLineString()" value = "Add Line Straight"> 
-    <input type = "button" onclick = "checkLine(program.length-1)" value = "Check Last Line">
-    </div>
-    <div id="instructions">
-    </div>
-    <div id="code">
+	    <h4 style="width:100%; text-align=center;color=red;">Code Editor</h4>
+	    <input type = "button" onclick = "showCode(true)" value = "Show Code"> 
+	    <input type = "button" onclick = "clearCode()" value = "Clear Code"> 
+	    <input type = "button" onclick = "initialize()" value = "Title + Coder"> 
+	    <input type = "button" onclick = "addLineByParts()" value = "Add Line">
+	    <input type = "button" onclick = "addLineString()" value = "Insert Line"> 
+	    <input type = "button" onclick = "delLine()" value = "Delete Line"> 
     </div>
     <script type="text/javascript" src="commands.js"></script> 
     <script type="text/javascript" src="runtime.js"></script> 

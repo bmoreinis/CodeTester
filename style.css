@@ -7,11 +7,16 @@ input {
   padding:2px;
   margin:3px;
 }
-#code {
+#code,#alertArea {
   width:95%;
   border:1px solid black;
-  min-height:200px;
+  min-height:100px;
   margin-top:5px;
+  padding:10px;
+  font-family:'Courier New', Courier, monospace;
+  text-align:left;
+}
+#alertArea {
 }
 
 #code p {
@@ -21,4 +26,13 @@ input {
 .tab {
     display: inline-block;
     margin-left: 10px;
+}
+
+dd {
+  color:red;
+  font-size:10pt;
+}
+dd li {
+  font-size:10pt;
+  color:blue;
 }
