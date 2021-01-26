@@ -1,16 +1,18 @@
 /* Functions */
 
+function start() {
+  var alertArea = document.getElementById("alertArea");
+  alertArea.innerHTML="Welcome to BabySister!  If you don't know what this is and want to, I have a one-hour montage of recordings from various classes.<a href=\"mailto:bmoreinis@slprep.org\">Email me</a> for a link.";
+  loadDocs();
+  console.log("Command Docs length = "+commandDocs.length);
+}
+
 function initialize(){
   let title=prompt("Title of program?");
   let coder=prompt("Name of coder?");
   let nC = new Code(10,title+" by "+coder);
   program.unshift(nC);
   console.log(JSON.stringify(program[0]));
-}
-
-function start() {
-  var alertArea = document.getElementById("alertArea");
-  alertArea.innerHTML="Welcome to BabySister!  If you don't know what this is and want to, I have a one-hour montage of recordings from various classes.<a href=\"mailto:bmoreinis@slprep.org\">Email me</a> for a link.";
 }
 
 function hideAlert() {
@@ -27,13 +29,23 @@ function loadDocs(){
     let newCommand=new CommandDoc(commandDocValues[c][0],commandDocValues[c][1],commandDocValues[c][2],commandDocValues[c][3]);
     commandDocs.push(newCommand);
   }
-  showCommands();
 }
 
 function showClasses(){
   var alertArea = document.getElementById("alertArea");
   alertArea.style.display = "block";
   alertArea.innerHTML="<p style=\"text-align:center;\"><input type = \"button\" style=\"background-color:yellow;\" onclick = \"hideAlert()\" value = \"Hide Documentation\"></p>"+classDocs;
+}
+
+function showCode(lineNumbers){
+  var code = document.getElementById("code");
+  lnNumbers=lineNumbers;
+  programOutput="\n";
+  program.sort((a, b) => (parseInt(a.lineNum) > parseInt(b.lineNum)) ? 1 : parseInt((a.lineNum) === parseInt(b.lineNum)) ? ((a.command > b.command) ? 1 : -1) : -1 )
+  for (let i=0;i<program.length;i++){
+    programOutput+="<p>"+program[i].toString()+"</p>";
+  }
+  code.innerHTML=programOutput;
 }
 
 function showCommands(){
@@ -49,27 +61,21 @@ function showCommands(){
   alertArea.innerHTML=commandString;
 }
 
-function showCode(lineNumbers){
-  var code = document.getElementById("code");
-  lnNumbers=lineNumbers;
-  programOutput="\n";
-  program.sort((a, b) => (parseInt(a.lineNum) > parseInt(b.lineNum)) ? 1 : parseInt((a.lineNum) === parseInt(b.lineNum)) ? ((a.command > b.command) ? 1 : -1) : -1 )
-  for (let i=0;i<program.length;i++){
-    programOutput+="<p>"+program[i].toString()+"</p>";
-  }
-  code.innerHTML=programOutput;
-}
 
 function addCommand(){
   let rules=[], result=[];
+  console.log("Command Docs length = "+commandDocs.length);
   let cWord = prompt("Command?");
   let cTakes = prompt("Argument?");
   let cRules = prompt("Rules?");
   rules.push(cRules);
   let cResult = prompt("Result?");
   result.push(cResult);
-  let newCommand = new CommandDoc(cWord,cTakes,rules,result);
+  var newCommand = new CommandDoc(cWord,cTakes,rules,result);
   commandDocs.push(newCommand);
+  console.log("Command Docs length = "+commandDocs.length);
+  console.log(JSON.stringify(newCommand)+" added to Docs.");
+  
   }
 
 function addLineByParts(){

@@ -5,18 +5,12 @@ var ln = 0;
 var program=[];
 var locations=[];
 var objects=[];
-var commandDocs = [];
 var lnNumbers=false;
+var commandDocs=[];
 var objects=["butterKnife","breadKnife","spoon", "plate","slice","peanutButter","jelly","peanutButterJar", "jellyJar","fridge","pantry","cubboard","breadBox","breadBag","drawer"];
 var spreadables=["peanutButter","jelly","mayonnaise","butter","creamCheese","nutella"];
 var containers=["peanutButterJar", "jellyJar","fridge","pantry","cubboard","breadBox","breadBag","drawer"];
 var locations=["pantry","cupboard","fridge","counter"];
-var buttons = document.getElementById("buttons");
-var code = document.getElementById("code");
-var instructions = document.getElementById("instructions");
-var alertArea = document.getElementById("alert-area");
-var playButton = document.getElementById("play");
-var alertBox = document.createElement("dialog");
 
 /* Class definitions */
 var classDocs = "<h4>Classes</h4><p>BabySister creates a world of Objects and Locations. Objects are introduced as needed and then used with consistency, so call a butterKnife a knife unless you want to distinguish between breadKnife and butterKnife. There is no pre-mixed peanutButterAndJelly.</p><p> Some Objects \(like jars\) and Locations \(like a pantry\) are Containers.  A Container Location is called a CLocation; a Container Object is written CObject. Some Objects are Spreadable \(SObject\). </p><p>A Location has a name and a container property.  If its .container value is true, it is a CLocation. A CLocation has an additional property .open, which can be true \(it is open\) or false \(it is closed\).</p><p>Objects and CObjects also have container and location properties.  Object.location = pantry would be true for a plate until it is moved. Objects are moved by Hands. Our program initializes by creating two Hands, with names left and right. A Hand has a holding property \(left.holding = peanutButterJar\).</p><p>There is also a Sister object, with a name, a location, a hunger level and a frustration level. These levels will be used for gamification, but are not currently developed. When a new Sister is created, it is given a location of kitchen.</p><p>The BabySister language is also object-oriented, with each line of code as an object with a line number, a command, and an argument.  The Code class is a block comment \(argument = null\), and the Command class has a command and an argument. Each of these have .toString properties that control how they are displayed.</p><p>CommandDoc is an object of documentation, and it, too, is object oriented.  Each CommandDoc has a command, an argument \(expressed as an object class, or two\), a list of rules \(the JavaScript version of RepOK\) and a list of results \(how the world changes after the command is executed\).</p>";
