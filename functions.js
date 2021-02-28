@@ -21,6 +21,7 @@ function hideAlert() {
   alertArea.style.display = "none";
 }
 
+
 function loadDocs(){
   while (commandDocs.length) {
     commandDocs.pop();
@@ -50,7 +51,6 @@ function showCode(lineNumbers){
 
 function showCommands(){
   var alertArea = document.getElementById("alertArea");
-  let newCommand="";
   let commandString="<p style=\"text-align:center;\"><input type = \"button\" style=\"background-color:yellow;\" onclick = \"hideAlert()\" value = \"Hide Documentation\"></p>";
   commandString+="<dl>";
   for(let i=0;i<commandDocs.length;i++){
@@ -63,20 +63,32 @@ function showCommands(){
 
 
 function addCommand(){
-  let rules=[], result=[];
-  console.log("Command Docs length = "+commandDocs.length);
-  let cWord = prompt("Command?");
-  let cTakes = prompt("Argument?");
-  let cRules = prompt("Rules?");
-  rules.push(cRules);
-  let cResult = prompt("Result?");
-  result.push(cResult);
-  var newCommand = new CommandDoc(cWord,cTakes,rules,result);
-  commandDocs.push(newCommand);
-  console.log("Command Docs length = "+commandDocs.length);
-  console.log(JSON.stringify(newCommand)+" added to Docs.");
-  
+  let rules=[], results=[];
+  console.log("Commands length = "+commandDocs.length);
+  let cWord = prompt("New command?");
+  let cTakes = prompt("New argument?");
+  let ruleNum = prompt("How many rules?");
+  for (rule=0;rule<ruleNum;rule++){
+    let cRule = prompt("Rele "+rule+" of "+ruleNum+"?");
+    rules.push(cRule);
   }
+  let resNum = prompt("How many results?");
+  for (res=0;res<resNum;res++){
+    let cResult = prompt("Result "+res+" of "+resNum+"?");
+    results.push(cResult);
+  }
+  var newCommand = new CommandDoc(cWord,cTakes,rules,results);
+  commandDocs.push(newCommand);
+  console.log("Commands length = "+commandDocs.length);
+  console.log(JSON.stringify(newCommand)+" added to Docs.");
+}
+
+function exportCommands(){
+  var alertArea = document.getElementById("alertArea");
+  let commandString=JSON.stringify(commandDocs);
+  alertArea.style.display = "block";
+  alertArea.innerHTML=commandString;
+}
 
 function addLineByParts(){
     lineNum=(program.length+1)*10;
