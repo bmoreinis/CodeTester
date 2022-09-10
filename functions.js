@@ -2,7 +2,7 @@
 
 function start() {
   var alertArea = document.getElementById("alertArea");
-  alertArea.innerHTML="Welcome to BabySister!  If you don't know what this is and want to, I have a one-hour montage of recordings from various classes.<a href=\"mailto:bmoreinis@slprep.org\">Email me</a> for a link.";
+  alertArea.innerHTML="Welcome to BabySister!";
   loadDocs();
   console.log("Command Docs length = "+commandDocs.length);
 }
